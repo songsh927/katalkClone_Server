@@ -14,9 +14,11 @@ app.route('/auth', authRouter);
 
 app.use((req, res, next) => {
     res.statusCode(404);
-})
+});
 
 app.use((error, req, res, next) => {
     console.error(error);
     res.statusCode(500);
-})
+});
+
+app.listen(8080);
