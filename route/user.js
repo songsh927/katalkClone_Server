@@ -1,4 +1,5 @@
 import express from 'express';
+import * as userController from '../controller/user.js';
 
 const router = express.Router();
 
@@ -12,10 +13,7 @@ router.post('/me');
 router.put('/me');
 
 //친구찾기
-router.get('/find');
-
-//친구정보불러오기
-router.get('/:id');
+router.get('/find', userController.findFriend);
 
 //친구추가
 router.post('/:id');
