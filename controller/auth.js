@@ -1,4 +1,7 @@
 import 'express-async-errors';
+import * as userRepository from '../data/users.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const userData = {
     'userId' : 'son',
@@ -7,17 +10,26 @@ const userData = {
 
 export async function login(req, res){
     const {userId, userPassword} = req.body;
-    
-    if(userId === userData.userId && userPassword === userData.userPassword){
-        return res.sendStatus(200);
-    };
-    return res.sendStatus(400);
+    const user = await userRepository.findByuserId(userId);
+
+    if(user){
+        return res.status(401).json({message: `Invalid username or password`});
+    }
+
+    if(user.userPassword !== userPassword){
+        return res.status(401).json({message: `Invalid username or password`});
+    }
+
+    return res.sendStatus(200)
 }
 
 export async function signup(req, res){
     const {userName, phone, userId, userPassword} = req.body;
-
-    console.log(userName, phone, userId, userPassword);
+    const user = await userRepository.findByuserId(userId);
+    if(user){
+        return res.status(400).json({message : `존재하는 아이디 입니다.`})
+    }
+    userRepository.create(userName, phone, userId, userPassword);
     return res.sendStatus(201);
 }
 
