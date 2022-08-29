@@ -1,13 +1,27 @@
 import 'express-async-errors';
 
+export async function findById(id){
+  const user = users.find((user) => user.id == id);
+  if(user){
+    return user;
+  }
+  return null;
+}
+
 export async function findByuserId(userId){
-    console.log(userId)
-    const data = users.find((user) => user.userId == userId);
-    console.log(data);
-    if(data){
-        return data;
+    const user = users.find((user) => user.userId == userId);
+    if(user){
+        return user;
     }
-    return false;
+    return null;
+}
+
+export async function findByuserName(userName){
+  const data = users.find((user) => user.name == userName);
+  if(data){
+    return true;
+  }
+  return null;
 }
 
 export async function create(userName, phone, userId, userPassword){
@@ -22,7 +36,12 @@ export async function create(userName, phone, userId, userPassword){
   }
 
   users.push(user);
-  return user;
+  return user.id;
+}
+
+export async function addFriendById(id, friendId){
+  const user = await findById(id);
+  user.friendId.push(friendId)
 }
 
 
@@ -33,31 +52,35 @@ const users = [
         'name' : '손흥민',
         'phone' : '01012341234',
         'userId' : 'sonNo7',
-        'userPassword' : '',
+        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
         'picture' : '',
+        'friendId' : ['2','3']
       },
       {
         'id' : 2,
         'name' : '박지성',
         'phone' : '01012341234',
         'userId' : 'jspark',
-        'userPassword' : '1234q',
+        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
         'picture' : '',
+        'friendId' : ['1','3']
       },
       {
         'id' : 3,
         'name' : '홍길동',
         'phone' : '01012341234',
         'userId' : 'honggildong123',
-        'userPassword' : '',
+        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
         'picture' : '',
+        'friendId' : ['1','2']
       },
       {
         'id' : 4,
         'name' : '송짬마',
         'phone' : '01098765432',
-        'firendId' : 'jjamma',
-        'userPassword' : '',
-        'picture' : ''
+        'userId' : 'jjamma',
+        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
+        'picture' : '',
+        'friendId' : []
       }
 ]

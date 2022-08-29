@@ -3,36 +3,62 @@ import * as userRepository from '../data/users.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-const userData = {
-    'userId' : 'son',
-    'userPassword' : '1234qwer'
-}
+const JWT_SECRET = 'F2dN7x8HVzBWaQuEEDnhsvHXRWqAR63z';
 
 export async function login(req, res){
     const {userId, userPassword} = req.body;
+    
     const user = await userRepository.findByuserId(userId);
-
-    if(user){
+    if(!user){
         return res.status(401).json({message: `Invalid username or password`});
     }
 
-    if(user.userPassword !== userPassword){
+    const isValidPassword = await bcrypt.compare(userPassword, user.userPassword);
+    if(!isValidPassword){
         return res.status(401).json({message: `Invalid username or password`});
     }
 
-    return res.sendStatus(200)
+    const token = createToken(user.id);
+    setToken(res, token);
+
+    return res.status(200).json({token, userId});
 }
 
 export async function signup(req, res){
     const {userName, phone, userId, userPassword} = req.body;
-    const user = await userRepository.findByuserId(userId);
-    if(user){
-        return res.status(400).json({message : `존재하는 아이디 입니다.`})
+
+    const finduserId = await userRepository.findByuserId(userId);
+    if(finduserId){
+        return res.status(401).json({message : `존재하는 아이디 입니다.`})
     }
-    userRepository.create(userName, phone, userId, userPassword);
+
+    const finduserName = await userRepository.findByuserName(userName);
+    if(finduserName){
+        return res.status(401).json({message: `가입된 정보가 있습니다.`})
+    }
+
+    const hashed = await bcrypt.hash(userPassword, 12);
+    const id = await userRepository.create(userName, phone, userId, hashed);
+
+    const token = createToken(id);
+    setToken(res, token);
     return res.sendStatus(201);
 }
 
 export async function logout(req, res){}
 
 export async function me(req, res){}
+
+function createToken(id){
+    return jwt.sign({id}, JWT_SECRET, {expiresIn : "86400"});
+}
+
+function setToken(res, token){
+    const options = {
+        maxAge : 86400,
+        httpOnly : true,
+        sameSite : 'none',
+        secure : true
+    };
+    res.cookie('token', token, options);
+}
