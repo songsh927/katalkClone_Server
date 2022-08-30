@@ -16,7 +16,7 @@ app.use('/chat', chatRouter);
 app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
-    res.statusCode(404);
+    res.sendStatus(404);
 });
 
 app.use((error, req, res, next) => {

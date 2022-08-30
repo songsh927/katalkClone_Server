@@ -29,3 +29,28 @@ export async function addFriend(req, res){
 export async function deleteFriend(req, res){
 
 }
+
+export async function getMyInfo(req, res){
+    const id = req.query.id
+    const user = await userRepository.findById(id); //await userRepository.findById(req.id);
+    if(!user){
+        return res.status(404);
+    }
+    return res.status(200).json(user);
+}
+
+export async function updateMyInfo(req, res){
+    const {name, phone, picture} = req.body;
+    const user = await userRepository.findById(req.query.id);//await userRepository.findById(req.id);
+
+    if(!user){
+        return res.status(404);
+    }
+
+    const updated = userRepository.update(name, phone, picture, req.query.id);
+
+    if(updated){
+        return res.status(203);
+    }
+    
+}

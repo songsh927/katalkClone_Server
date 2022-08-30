@@ -39,6 +39,16 @@ export async function create(userName, phone, userId, userPassword){
   return user.id;
 }
 
+export async function update(name, phone, picture , id){
+  const user = await findById(id);
+
+  if(name != null){user.name = name}
+  if(phone  != null){user.phone = phone}
+  if(picture  != null){user.picture = picture}
+
+  return true;
+}
+
 export async function addFriendById(id, friendId){
   const user = await findById(id);
   user.friendId.push(friendId)

@@ -1,24 +1,22 @@
 import express from 'express';
 import * as userController from '../controller/user.js';
+import {isAuth} from '../middleware/auth.js';
 
 const router = express.Router();
 
 //내정보불러오기
-router.get('/me');
-
-//내정보추가
-router.post('/me');
+router.get('/me', isAuth, userController.getMyInfo);
 
 //내정보수정
-router.put('/me');
+router.put('/me', isAuth, userController.updateMyInfo);
 
 //친구찾기
 router.get('/find', userController.findFriend);
 
 //친구추가
-router.post('/:id', userController.addFriend);
+router.post('/:id', isAuth, userController.addFriend);
 
 //친구삭제
-router.delete('/:id', userController.deleteFriend);
+router.delete('/:id', isAuth, userController.deleteFriend);
 
 export default router;
