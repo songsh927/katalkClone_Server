@@ -14,9 +14,9 @@ router.put('/me', isAuth, userController.updateMyInfo);
 router.get('/find', userController.findFriend);
 
 //친구추가
-router.post('/:id', isAuth, userController.addFriend);
+router.post('/add', isAuth, userController.addFriend);
 
 //친구삭제
-router.delete('/:id', isAuth, userController.deleteFriend);
+router.delete('/del', isAuth, userController.deleteFriend);
 
 export default router;

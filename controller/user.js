@@ -17,9 +17,11 @@ export async function findFriend(req, res){
 }
 
 export async function addFriend(req, res){
-    const id = req.params.id;
-    const user = await userRepository.findById(id);
+    
+    const user = await userRepository.findById(req.id); //=> isAuth 개발 이후 적용
+    console.log(user);
     const addUserId = req.query.id;
+    console.log(addUserId);
     if(user){
         await userRepository.addFriendById(user.id, addUserId)
     }
@@ -27,12 +29,16 @@ export async function addFriend(req, res){
 }
 
 export async function deleteFriend(req, res){
-
+    const user = await userRepository.findById(req.id); //=> isAuth 개발 이후 적용
+    const addUserId = req.query.id;
+    if(user){
+        await userRepository.deleteFriendById(user.id, addUserId)
+    }
+    return res.sendStatus(204)
 }
 
 export async function getMyInfo(req, res){
-    const id = req.query.id
-    const user = await userRepository.findById(id); //await userRepository.findById(req.id);
+    const user = await userRepository.findById(req.id); //=> isAuth 개발 이후 적용
     if(!user){
         return res.status(404);
     }
@@ -40,14 +46,14 @@ export async function getMyInfo(req, res){
 }
 
 export async function updateMyInfo(req, res){
-    const {name, phone, picture} = req.body;
-    const user = await userRepository.findById(req.query.id);//await userRepository.findById(req.id);
+    const picture = req.body;
+    const user = await userRepository.findById(req.id); //=> isAuth 개발 이후 적용
 
     if(!user){
         return res.status(404);
     }
 
-    const updated = userRepository.update(name, phone, picture, req.query.id);
+    const updated = userRepository.update(picture, req.query.id);
 
     if(updated){
         return res.status(203);

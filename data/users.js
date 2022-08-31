@@ -32,26 +32,32 @@ export async function create(userName, phone, userId, userPassword){
     'phone' : phone,
     'userId' : userId,
     'userPassword' : userPassword,
-    'pic' : ''
+    'pic' : '',
+    'friendId' : []
   }
 
   users.push(user);
   return user.id;
 }
 
-export async function update(name, phone, picture , id){
+export async function update(picture , id){
   const user = await findById(id);
 
-  if(name != null){user.name = name}
-  if(phone  != null){user.phone = phone}
-  if(picture  != null){user.picture = picture}
-
+  if(!picture){
+    return ;
+  }
+  user.picture = picture
   return true;
 }
 
 export async function addFriendById(id, friendId){
   const user = await findById(id);
   user.friendId.push(friendId)
+}
+
+export async function deleteFriendById(id, friendId){
+  const user = await findById(id);
+  user.friendId = user.friendId.filter(id => id !== friendId)
 }
 
 
