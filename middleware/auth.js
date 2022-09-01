@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import * as userRepository from '../data/users.js';
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 const AUTH_ERROR = {message: 'Authentication Error'};
-const JWT_SECRET = 'F2dN7x8HVzBWaQuEEDnhsvHXRWqAR63z'
-
+const JWT_SECRET = process.env.JWT_SECRET;
 export const isAuth = async (req, res, next) => {
 
     let token;

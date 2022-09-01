@@ -2,8 +2,12 @@ import 'express-async-errors';
 import * as userRepository from '../data/users.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 
-const JWT_SECRET = 'F2dN7x8HVzBWaQuEEDnhsvHXRWqAR63z';
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const expiresIn = process.env.EXPIRES_IN;
 
 export async function login(req, res){
     const {userId, userPassword} = req.body;
@@ -50,7 +54,7 @@ export async function logout(req, res){}
 export async function me(req, res){}
 
 function createToken(id){
-    return jwt.sign({id}, JWT_SECRET, {expiresIn : "86400"});
+    return jwt.sign({id}, JWT_SECRET, { expiresIn});
 }
 
 function setToken(res, token){

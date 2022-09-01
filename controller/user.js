@@ -3,7 +3,6 @@ import * as userRepository from '../data/users.js';
 
 export async function findFriend(req, res){
     const userId = req.query.userId;
-    //console.log(userId);
     const user = await userRepository.findByuserId(userId);
 
     const data = {
