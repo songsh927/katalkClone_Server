@@ -8,6 +8,8 @@ export async function findFriend(req, res){
     const data = {
         'id' : user.id,
         'name' : user.name,
+        'phone' : user.phone,
+        'userId' : user.userId,
         'picture' : user.picture
     }
 
