@@ -3,7 +3,15 @@ import * as userRepository from '../data/users.js';
 
 export async function findFriend(req, res){
     const userId = req.query.userId;
-    const user = await userRepository.findByuserId(userId);
+    const id = req.query.id;
+    let user;
+    if(userId){
+        user = await userRepository.findByuserId(userId);
+    }
+    if(id){
+        user = await userRepository.findById(id);
+    }
+    
 
     const data = {
         'id' : user.id,
@@ -20,9 +28,7 @@ export async function findFriend(req, res){
 export async function addFriend(req, res){
     
     const user = await userRepository.findById(req.id); //=> isAuth 개발 이후 적용
-    console.log(user);
     const addUserId = req.query.id;
-    console.log(addUserId);
     if(user){
         await userRepository.addFriendById(user.id, addUserId)
     }
