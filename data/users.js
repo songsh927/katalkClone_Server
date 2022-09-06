@@ -95,8 +95,8 @@ const users = [
         'name' : '송짬마',
         'phone' : '01098765432',
         'userId' : 'jjamma',
-        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
+        'userPassword' : '$2b$12$uginurmtoNbfArgHHBq3NOaYj1aJLBWKI1/e7A8C1VqB3esp6QdUG',
         'picture' : '',
-        'friendId' : []
+        'friendId' : [1,2,3]
       }
 ]
