@@ -1,5 +1,3 @@
-
-
 const msg = []
 /**
  * msg entity
@@ -10,11 +8,6 @@ const msg = []
  * }
  */
 
-const room = []
-/**
- * room entity
- * {
- *  roomId
- *  id
- * }
- */
+export async function createMsg(){}
+
+function msgForm(){}

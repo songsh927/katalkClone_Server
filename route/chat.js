@@ -1,9 +1,10 @@
 import express from 'express';
 import * as chatController from '../controller/chat.js';
+import { isAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/joinRoom', chatController.joinRoom)
+router.post('/joinRoom', isAuth, chatController.joinRoom)
 
 router.post('/exitRoom', chatController.exitRoom)
 
