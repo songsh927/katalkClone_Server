@@ -3,12 +3,13 @@ const room = []
 /**
  * room entity
  * {
+ *  socketId
  *  roomId
  *  id
  * }
  */
 
-export async function createRoom(friendId, id){
+export async function create(friendId, id){
     
     const roomId = friendId * id;
 
@@ -21,3 +22,7 @@ export async function createRoom(friendId, id){
     console.log(roomForm);
     return roomForm
 }
+
+export async function join(){}
+
+export async function exit(){}
