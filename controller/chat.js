@@ -1,6 +1,7 @@
 import 'express-async-errors';
 import * as chatRepository from '../data/chat.js';
 import * as roomRepository from '../data/room.js';
+import * as IO from '../connection/socket.js'
 
 export async function createRoom(req, res){
     const friendId = req.body.friendId;
@@ -51,4 +52,8 @@ export async function sendMessage(req, res){
 
 export async function loadMessage(req, res){
     const roomId = req.query.roomId;
+}
+
+export async function chat(req, res){
+    
 }

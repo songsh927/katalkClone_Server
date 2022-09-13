@@ -11,31 +11,30 @@ class Socket {
             //     origin: config.cors.allowOrigin,
             // },
         });
-        console.log('asdf')
 
         this.io.use((socket, next) => {
-            const token = socket.handshake.auth.token;
-            if(!token){
-                return next(new Error('Authentication Error'));
-            }
-            jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-                if(error){
-                    return next(new Error('Authentication Error'));
-                }
+            //const token = socket.handshake.auth.token;
+            // if(!token){
+            //     return next(new Error('Authentication Error'));
+            // }
+            // jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+            //     if(error){
+            //         return next(new Error('Authentication Error'));
+            //     }
                 next();
-            });
+            // });
         });
 
         this.io.on('connection', (socket) => {
             console.log('Socket On');
 
-            // socket.on('joinRoom', (roomId) => {
-            //     console.log(roomId);
-            // });
+            socket.on('joinRoom', (roomId) => {
+                console.log(roomId);
+            });
 
-            // socket.on('reqMsg', (msg) => {
-            //     console.log(msg)
-            // });
+            socket.on('reqMsg', (msg) => {
+                console.log(msg)
+            });
 
         })
     }
