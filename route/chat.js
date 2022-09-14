@@ -14,6 +14,6 @@ router.post('/exitRoom', chatController.exitRoom)
 
 //router.get('/getMsg', chatController.getMessage)
 
-router.get('/', chatController.chat)
+//router.get('/', chatController.chat)
 
 export default router;

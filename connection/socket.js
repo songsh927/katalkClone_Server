@@ -12,11 +12,12 @@ export function initSocket(server){
             console.log(roomData);
             roomId = roomData.roomId
             socket.join(roomId);
+            
         });
 
         socket.on('send', (msgData) => {
             console.log('roomId : ' + msgData.roomId + ' msg : ' +msgData.text);
-            io.sockets.to(roomId).emit('rec', {message : msgData.text});
+            io.sockets.to(roomId).emit('rec', msgData);
         });
     })
 
