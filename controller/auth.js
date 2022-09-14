@@ -54,7 +54,7 @@ export async function logout(req, res){}
 export async function me(req, res){}
 
 function createToken(id){
-    return jwt.sign({id}, JWT_SECRET, { expiresIn});
+    return jwt.sign({id}, JWT_SECRET);
 }
 
 function setToken(res, token){

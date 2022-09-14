@@ -20,6 +20,8 @@ export async function createMsg(roomId, id, text, time){
         'chat' : text,
         'time' : msgTime
     }
+
+    return msgData;
 }
 
 export async function getMsg(){}

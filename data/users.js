@@ -77,7 +77,7 @@ const users = [
         'name' : '박지성',
         'phone' : '01012341234',
         'userId' : 'jspark',
-        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
+        'userPassword' : '$2b$12$uginurmtoNbfArgHHBq3NOaYj1aJLBWKI1/e7A8C1VqB3esp6QdUG',
         'picture' : '',
         'friendId' : ['1','3']
       },

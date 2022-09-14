@@ -10,7 +10,7 @@ router.post('/joinRoom', isAuth, chatController.joinRoom)
 
 router.post('/exitRoom', chatController.exitRoom)
 
-router.post('/sendMsg', chatController.sendMessage)
+//router.post('/sendMsg', isAuth ,chatController.sendMessage)
 
 //router.get('/getMsg', chatController.getMessage)
 

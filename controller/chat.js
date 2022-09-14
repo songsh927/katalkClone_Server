@@ -1,7 +1,7 @@
 import 'express-async-errors';
 import * as chatRepository from '../data/chat.js';
 import * as roomRepository from '../data/room.js';
-import * as IO from '../connection/socket.js'
+//import {getSocketIO} from '../connection/socket.js'
 
 export async function createRoom(req, res){
     const friendId = req.body.friendId;
@@ -9,6 +9,8 @@ export async function createRoom(req, res){
 
     const result = await roomRepository.create(friendId, id);
     
+    //getSocketIO().join(result.roomId);
+
     if(result){
         res.status(201).json(result);
     }
@@ -19,6 +21,7 @@ export async function joinRoom(req, res){
     const id = req.body.id;
 
     const result = await roomRepository.join(roomId, id);
+    //getSocketIO().join(roomId);
 
     if(result){
         res.status(200).json(result)
@@ -41,13 +44,17 @@ export async function sendMessage(req, res){
     const {roomId, text} = req.body;
     const today = new Date();
     
+    console.log(senderId + "," + roomId + "," + text);
 
-    const result = chatRepository.createMsg(senderId, roomId, text, today);
+    const msg = await chatRepository.createMsg(roomId, senderId, text, today);
+    
+    console.log(msg);
 
-    if(result){
-        res.sendStatus(201);
+    if(msg){
+        //getSocketIO().to(roomId).emit(msg);
+        res.status(200).json(msg);
     }
-
+    
 }
 
 export async function loadMessage(req, res){
