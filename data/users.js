@@ -68,7 +68,7 @@ const users = [
         'name' : '손흥민',
         'phone' : '01012341234',
         'userId' : 'sonNo7',
-        'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
+        'userPassword' : '$2b$12$uginurmtoNbfArgHHBq3NOaYj1aJLBWKI1/e7A8C1VqB3esp6QdUG',
         'picture' : '',
         'friendId' : ['2','3']
       },

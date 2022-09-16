@@ -3,10 +3,11 @@ import {Server} from 'socket.io';
 export function initSocket(server){
 
     const io = new Server(server);
+    let roomId;
 
     io.on('connection', (socket) => {
         console.log('socket connection');
-        let roomId;
+        
 
         socket.on('roomId', (roomData) => {
             console.log(roomData);
@@ -16,8 +17,7 @@ export function initSocket(server){
         });
 
         socket.on('send', (msgData) => {
-            console.log('roomId : ' + msgData.roomId + ' msg : ' +msgData.text);
-            io.sockets.to(roomId).emit('rec', msgData);
+            io.sockets.emit('rec', msgData);
         });
     })
 

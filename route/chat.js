@@ -10,10 +10,4 @@ router.post('/joinRoom', isAuth, chatController.joinRoom)
 
 router.post('/exitRoom', chatController.exitRoom)
 
-//router.post('/sendMsg', isAuth ,chatController.sendMessage)
-
-//router.get('/getMsg', chatController.getMessage)
-
-//router.get('/', chatController.chat)
-
 export default router;
