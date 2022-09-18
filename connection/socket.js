@@ -10,7 +10,6 @@ export function initSocket(server){
         
 
         socket.on('roomId', (roomData) => {
-            console.log(roomData);
             roomId = roomData.roomId
             socket.join(roomId);
             

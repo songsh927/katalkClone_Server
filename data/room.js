@@ -19,7 +19,6 @@ export async function create(friendId, id){
     }
 
     room.push(roomForm);
-    console.log(roomForm);
     return roomForm
 }
 
