@@ -36,24 +36,20 @@ export async function exitRoom(req, res){
 }
 
 export async function sendMessage(req, res){
-    const senderId = req.id;
-    const {roomId, text} = req.body;
-    const today = new Date();
+    const {roomId, id,text, time} = req.body;
     
-    console.log(senderId + "," + roomId + "," + text);
+    const reqMsg = chatRepository.createMsg(roomId, id, text, time);
 
-    const msg = await chatRepository.createMsg(roomId, senderId, text, today);
-    
-    console.log(msg);
-
-    if(msg){
-        res.status(200).json(msg);
+    if(reqMsg){
+        res.sendStatus(201);
     }
-    
 }
 
 export async function loadMessage(req, res){
+    const userId = req.id;
     const roomId = req.query.roomId;
+
+
 }
 
 export async function chat(req, res){

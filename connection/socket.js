@@ -10,13 +10,13 @@ export function initSocket(server){
         
 
         socket.on('roomId', (roomData) => {
-            roomId = roomData.roomId
-            socket.join(roomId);
+            roomId = roomData;
+            socket.join(roomData);
             
         });
 
         socket.on('send', (msgData) => {
-            io.sockets.emit('rec', msgData);
+            io.in(msgData.roomId).emit('rec', msgData);
         });
     })
 

@@ -10,17 +10,14 @@ const msg = []
 
 export async function createMsg(roomId, id, text, time){
 
-    const hour = time.getHours();
-    const min = time.getMinutes();
-    const msgTime = hour + ':' + min;
-
     const msgData = {
         'roomId' : roomId,
         'id' : id,
         'chat' : text,
-        'time' : msgTime
+        'time' : time
     }
 
+    msg.push(msgData);
     return msgData;
 }
 
