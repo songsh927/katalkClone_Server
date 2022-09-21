@@ -12,6 +12,8 @@ router.post('/exitRoom', chatController.exitRoom);
 
 router.post('/msg', chatController.sendMessage);
 
-router.get('/msg', isAuth, chatController.loadMessage)
+router.get('/msg', isAuth, chatController.loadMessage);
+
+router.post('/image', chatController.sendImage);
 
 export default router;

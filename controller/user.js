@@ -1,5 +1,10 @@
 import 'express-async-errors';
+import multer from 'multer';
 import * as userRepository from '../data/users.js';
+
+const imageUpload = multer(
+    {dest:'../data/image/', limits : {fileSize : 1024 * 1024}}
+);
 
 export async function findFriend(req, res){
     const userId = req.query.userId;
@@ -52,18 +57,6 @@ export async function getMyInfo(req, res){
     return res.status(200).json(user);
 }
 
-export async function updateMyInfo(req, res){
-    const picture = req.body;
-    const user = await userRepository.findById(req.id); //=> isAuth 개발 이후 적용
+export async function updateMyInfo(req, res){}
 
-    if(!user){
-        return res.status(404);
-    }
-
-    const updated = userRepository.update(picture, req.query.id);
-
-    if(updated){
-        return res.status(203);
-    }
-    
-}
+export async function imageUpload(req, res){}

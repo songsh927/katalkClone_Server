@@ -45,13 +45,13 @@ export async function sendMessage(req, res){
     }
 }
 
+export async function sendImage(req, res){
+
+}
+
 export async function loadMessage(req, res){
     const userId = req.id;
     const roomId = req.query.roomId;
 
 
-}
-
-export async function chat(req, res){
-    
 }

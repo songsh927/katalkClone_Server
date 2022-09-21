@@ -10,6 +10,9 @@ router.get('/me', isAuth, userController.getMyInfo);
 //내정보수정
 router.put('/me', isAuth, userController.updateMyInfo);
 
+//내사진추가
+router.post('/picture', userController.imageUpload);
+
 //친구찾기
 router.get('/find', userController.findFriend);
 
