@@ -2,9 +2,6 @@ import 'express-async-errors';
 import multer from 'multer';
 import * as userRepository from '../data/users.js';
 
-const imageUpload = multer(
-    {dest:'../data/image/', limits : {fileSize : 1024 * 1024}}
-);
 
 export async function findFriend(req, res){
     const userId = req.query.userId;
@@ -59,4 +56,24 @@ export async function getMyInfo(req, res){
 
 export async function updateMyInfo(req, res){}
 
-export async function imageUpload(req, res){}
+export async function userProfileUpload(req, res){
+    const id = req.id;
+
+    const upload = multer({
+        storage: multer.diskStorage({
+          //폴더위치 지정
+          destination: (req, file, done) => {
+            done(null, "./profile/");
+          },
+          filename: (req, file, done) => {
+            const ext = path.extname(file.originalname);
+            const fileName = path.basename(file.originalname, ext) + Date.now() + ext;
+            done(null, fileName);
+          },
+        }),
+      });
+
+    upload.single('img');
+    res.sendStatus(200);
+
+}

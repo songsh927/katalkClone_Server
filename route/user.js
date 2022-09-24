@@ -11,7 +11,7 @@ router.get('/me', isAuth, userController.getMyInfo);
 router.put('/me', isAuth, userController.updateMyInfo);
 
 //내사진추가
-router.post('/picture', userController.imageUpload);
+router.post('/profile', isAuth, userController.userProfileUpload);
 
 //친구찾기
 router.get('/find', userController.findFriend);
