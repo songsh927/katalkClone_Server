@@ -1,6 +1,7 @@
 import express from 'express';
 import * as userController from '../controller/user.js';
 import {isAuth} from '../middleware/auth.js';
+import {profileUpload,image} from '../middleware/image.js';
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get('/me', isAuth, userController.getMyInfo);
 router.put('/me', isAuth, userController.updateMyInfo);
 
 //내사진추가
-router.post('/profile', isAuth, userController.userProfileUpload);
+router.post('/profile', isAuth, profileUpload.single('img'), userController.userProfileUpload);
 
 //친구찾기
 router.get('/find', userController.findFriend);

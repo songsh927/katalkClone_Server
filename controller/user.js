@@ -57,23 +57,20 @@ export async function getMyInfo(req, res){
 export async function updateMyInfo(req, res){}
 
 export async function userProfileUpload(req, res){
-    const id = req.id;
+    // const id = req.id;
+    // const fileDest = req.file.destination;
+    
+    // multer.diskStorage({
+    //     destination : (req, file, cb) => {
+    //         cb(null, fileDest)
+    //     },
+    //     filename : (req, file, cb) => {
+    //         cb(null, id + '_' + Date.now())
+    //     }
+    // })
 
-    const upload = multer({
-        storage: multer.diskStorage({
-          //폴더위치 지정
-          destination: (req, file, done) => {
-            done(null, "./profile/");
-          },
-          filename: (req, file, done) => {
-            const ext = path.extname(file.originalname);
-            const fileName = path.basename(file.originalname, ext) + Date.now() + ext;
-            done(null, fileName);
-          },
-        }),
-      });
-
-    upload.single('img');
+    //console.log(fileDest);
+    //console.log(req.file);
     res.sendStatus(200);
 
 }
