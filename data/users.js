@@ -32,7 +32,7 @@ export async function create(userName, phone, userId, userPassword){
     'phone' : phone,
     'userId' : userId,
     'userPassword' : userPassword,
-    'pic' : '',
+    'profile' : '',
     'friendId' : []
   }
 
@@ -40,14 +40,14 @@ export async function create(userName, phone, userId, userPassword){
   return user.id;
 }
 
-export async function update(picture , id){
+export async function updateProfile(profilePath , id){
   const user = await findById(id);
 
-  if(!picture){
-    return ;
+  if(user){
+    user.profile = `./${profilePath}`;
   }
-  user.picture = picture
-  return true;
+  
+  return user;
 }
 
 export async function addFriendById(id, friendId){
@@ -69,7 +69,7 @@ const users = [
         'phone' : '01012341234',
         'userId' : 'sonNo7',
         'userPassword' : '$2b$12$uginurmtoNbfArgHHBq3NOaYj1aJLBWKI1/e7A8C1VqB3esp6QdUG',
-        'picture' : '',
+        'profile' : '',
         'friendId' : ['2','3']
       },
       {
@@ -78,7 +78,7 @@ const users = [
         'phone' : '01012341234',
         'userId' : 'jspark',
         'userPassword' : '$2b$12$uginurmtoNbfArgHHBq3NOaYj1aJLBWKI1/e7A8C1VqB3esp6QdUG',
-        'picture' : '',
+        'profile' : '',
         'friendId' : ['1','3']
       },
       {
@@ -87,7 +87,7 @@ const users = [
         'phone' : '01012341234',
         'userId' : 'honggildong123',
         'userPassword' : '$2b$12$ZLhm3bMl9T.WXeNruKqLo.RwSGJjK6xcxnQPxaOauheaUPTDgPHbS',
-        'picture' : '',
+        'profile' : '',
         'friendId' : ['1','2']
       },
       {
@@ -96,7 +96,7 @@ const users = [
         'phone' : '01098765432',
         'userId' : 'jjamma',
         'userPassword' : '$2b$12$uginurmtoNbfArgHHBq3NOaYj1aJLBWKI1/e7A8C1VqB3esp6QdUG',
-        'picture' : '',
+        'profile' : '',
         'friendId' : [1,2,3]
       }
 ]

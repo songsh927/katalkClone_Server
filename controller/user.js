@@ -57,20 +57,9 @@ export async function getMyInfo(req, res){
 export async function updateMyInfo(req, res){}
 
 export async function userProfileUpload(req, res){
-    // const id = req.id;
-    // const fileDest = req.file.destination;
     
-    // multer.diskStorage({
-    //     destination : (req, file, cb) => {
-    //         cb(null, fileDest)
-    //     },
-    //     filename : (req, file, cb) => {
-    //         cb(null, id + '_' + Date.now())
-    //     }
-    // })
+    const user = await userRepository.updateProfile(req.file.path, req.id);
 
-    //console.log(fileDest);
-    //console.log(req.file);
-    res.sendStatus(200);
-
+    res.status(200).json(user);
 }
+
