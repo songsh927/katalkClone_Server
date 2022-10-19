@@ -27,7 +27,7 @@ export async function findByuserName(userName){
 export async function create(userName, phone, userId, userPassword){
 
   const user = {
-    'id' : users.length+1,
+    'id' : users.length+1,  //db에서 처리할것
     'name' : userName,
     'phone' : phone,
     'userId' : userId,
