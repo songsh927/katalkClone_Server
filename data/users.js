@@ -1,56 +1,85 @@
 import 'express-async-errors';
+import {Users} from './model/user.js'
 
 export async function findById(id){
-  const user = users.find((user) => user.id == id);
-  if(user){
-    return user;
-  }
-  return null;
+
+  return await Users.findOne({
+    where:{id}
+  })
+
+  // const user = users.find((user) => user.id == id);
+  // if(user){
+  //   return user;
+  // }
+  // return null;
 }
 
 export async function findByuserId(userId){
-    const user = users.find((user) => user.userId == userId);
-    if(user){
-        return user;
-    }
-    return null;
+
+  return await Users.findOne({
+    where:{userId}
+  })
+    // const user = users.find((user) => user.userId == userId);
+    // if(user){
+    //     return user;
+    // }
+    // return null;
 }
 
 export async function findByuserName(userName){
-  const data = users.find((user) => user.name == userName);
-  if(data){
-    return true;
-  }
-  return null;
+
+  return await Users.findOne({
+    where: {name: userName}
+  })
+  // const data = users.find((user) => user.name == userName);
+  // if(data){
+  //   return true;
+  // }
+  // return null;
 }
 
 export async function create(userName, phone, userId, userPassword){
 
-  const user = {
-    'id' : users.length+1,  //db에서 처리할것
-    'name' : userName,
-    'phone' : phone,
-    'userId' : userId,
-    'userPassword' : userPassword,
-    'profile' : '',
-    'friendId' : []
-  }
+  return await Users.create({
+    name: userName,
+    phone: phone,
+    userId: userId,
+    userPassword: userPassword
+  })
+  // const user = {
+  //   'id' : users.length+1,  //db에서 처리할것
+  //   'name' : userName,
+  //   'phone' : phone,
+  //   'userId' : userId,
+  //   'userPassword' : userPassword,
+  //   'profile' : '',
+  //   'friendId' : []
+  // }
 
-  users.push(user);
-  return user.id;
+  // users.push(user);
+  // return user.id;
 }
 
 export async function updateProfile(profilePath , id){
-  const user = await findById(id);
 
-  if(user){
-    user.profile = `./${profilePath}`;
-  }
+  return await Users.update({
+    profile: profilePath
+  },
+  {
+    where: {id},
+
+  })
+  // const user = await findById(id);
+
+  // if(user){
+  //   user.profile = `./${profilePath}`;
+  // }
   
-  return user;
+  // return user;
 }
 
 export async function addFriendById(id, friendId){
+  
   const user = await findById(id);
   user.friendId.push(friendId)
 }
